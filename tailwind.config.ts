@@ -61,6 +61,13 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				carnales: {
+					red: '#E63946',
+					yellow: '#F4A261',
+					black: '#1A1A1A',
+					orange: '#FF6B35',
+					purple: '#9D4EDD'
 				}
 			},
 			borderRadius: {
@@ -84,11 +91,30 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'float': {
+					'0%, 100%': { transform: 'translateY(0px)' },
+					'50%': { transform: 'translateY(-20px)' }
+				},
+				'float-slow': {
+					'0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+					'50%': { transform: 'translateY(-30px) rotate(5deg)' }
+				},
+				'flame': {
+					'0%, 100%': { transform: 'scaleY(1) scaleX(1)' },
+					'50%': { transform: 'scaleY(1.1) scaleX(0.95)' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'float': 'float 3s ease-in-out infinite',
+				'float-slow': 'float-slow 4s ease-in-out infinite',
+				'flame': 'flame 0.5s ease-in-out infinite'
+			},
+			fontFamily: {
+				'montserrat': ['Montserrat Alternates', 'sans-serif'],
+				'bungee': ['Bungee', 'cursive']
 			}
 		}
 	},

@@ -1,6 +1,5 @@
 import { ReactNode } from 'react'
 import { PageTemplate } from './PageTemplate'
-import { BrandLogoLeft } from '@/components/BrandLogoLeft'
 import { SocialLinks } from '@/components/SocialLinks'
 import { FloatingCart } from '@/components/FloatingCart'
 import { ProfileMenu } from '@/components/ProfileMenu'
@@ -9,14 +8,6 @@ import { Button } from '@/components/ui/button'
 import { ShoppingCart } from 'lucide-react'
 import { useCartUI } from '@/components/CartProvider'
 import { useCart } from '@/contexts/CartContext'
-import { Input } from '@/components/ui/input'
-
-/**
- * EDITABLE TEMPLATE - EcommerceTemplate
- * 
- * Template específico para páginas de ecommerce con header, footer y cart.
- * El agente IA puede modificar completamente el diseño, colores, layout.
- */
 
 interface EcommerceTemplateProps {
   children: ReactNode
@@ -42,13 +33,15 @@ export const EcommerceTemplate = ({
   const totalItems = getTotalItems()
 
   const header = (
-    <div className={`py-4 ${headerClassName}`}>
+    <div className={`py-4 ${headerClassName || 'bg-carnales-black'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center">
-            <Link to="/">
-              <BrandLogoLeft />
+            <Link to="/" className="flex items-center gap-2">
+              <span className="font-bungee text-2xl md:text-3xl text-white">
+                LOS CARNALES
+              </span>
             </Link>
           </div>
 
@@ -57,13 +50,31 @@ export const EcommerceTemplate = ({
             <nav className="flex space-x-6">
               <Link 
                 to="/" 
-                className="text-foreground/70 hover:text-foreground transition-colors"
+                className="text-white/90 hover:text-white transition-colors font-bold"
               >
-                Home
+                Shop
+              </Link>
+              <Link 
+                to="/about" 
+                className="text-white/90 hover:text-white transition-colors font-bold"
+              >
+                About
+              </Link>
+              <Link 
+                to="/find-us" 
+                className="text-white/90 hover:text-white transition-colors font-bold"
+              >
+                Find Us
+              </Link>
+              <Link 
+                to="/wholesale" 
+                className="text-white/90 hover:text-white transition-colors font-bold"
+              >
+                Wholesale
               </Link>
               <Link 
                 to="/blog" 
-                className="text-foreground/70 hover:text-foreground transition-colors"
+                className="text-white/90 hover:text-white transition-colors font-bold"
               >
                 Blog
               </Link>
@@ -79,12 +90,12 @@ export const EcommerceTemplate = ({
                 variant="ghost"
                 size="icon"
                 onClick={openCart}
-                className="relative"
+                className="relative text-white hover:bg-white/10"
                 aria-label="Ver carrito"
               >
                 <ShoppingCart className="h-5 w-5" />
                 {totalItems > 0 && (
-                  <span className="absolute -top-2 -right-2 bg-primary text-primary-foreground text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+                  <span className="absolute -top-2 -right-2 bg-carnales-red text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
                     {totalItems > 99 ? '99+' : totalItems}
                   </span>
                 )}
@@ -96,7 +107,7 @@ export const EcommerceTemplate = ({
         {/* Page Title */}
         {pageTitle && (
           <div className="mt-6">
-            <h1 className="text-3xl font-bold text-foreground">
+            <h1 className="font-bungee text-3xl text-white">
               {pageTitle}
             </h1>
           </div>
@@ -106,26 +117,63 @@ export const EcommerceTemplate = ({
   )
 
   const footer = (
-    <div className={`bg-black text-white py-12 ${footerClassName}`}>
+    <div className={`bg-carnales-black text-white py-12 ${footerClassName}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand */}
           <div>
-            <BrandLogoLeft />
-            <p className="mt-4 text-white/70">
-              Your trusted online store
+            <h3 className="font-bungee text-2xl mb-4">LOS CARNALES</h3>
+            <p className="text-white/70">
+              Authentic Mexican flavor meets badass modern design.
             </p>
           </div>
 
-          {/* Links */}
+          {/* Shop */}
           <div>
-            <h3 className="font-semibold mb-4 text-white">Links</h3>
+            <h4 className="font-bold mb-4 text-white">Shop</h4>
             <div className="space-y-2">
               <Link 
                 to="/" 
                 className="block text-white/70 hover:text-white transition-colors"
               >
-                Home
+                All Products
+              </Link>
+              <Link 
+                to="/" 
+                className="block text-white/70 hover:text-white transition-colors"
+              >
+                Best Sellers
+              </Link>
+              <Link 
+                to="/" 
+                className="block text-white/70 hover:text-white transition-colors"
+              >
+                New Arrivals
+              </Link>
+            </div>
+          </div>
+
+          {/* Company */}
+          <div>
+            <h4 className="font-bold mb-4 text-white">Company</h4>
+            <div className="space-y-2">
+              <Link 
+                to="/about" 
+                className="block text-white/70 hover:text-white transition-colors"
+              >
+                About Us
+              </Link>
+              <Link 
+                to="/find-us" 
+                className="block text-white/70 hover:text-white transition-colors"
+              >
+                Find Us
+              </Link>
+              <Link 
+                to="/wholesale" 
+                className="block text-white/70 hover:text-white transition-colors"
+              >
+                Wholesale
               </Link>
               <Link 
                 to="/blog" 
@@ -138,13 +186,16 @@ export const EcommerceTemplate = ({
 
           {/* Social Links */}
           <div>
-            <h3 className="font-semibold mb-4 text-white">Follow Us</h3>
+            <h4 className="font-bold mb-4 text-white">Follow Us</h4>
             <SocialLinks />
+            <p className="text-white/70 text-sm mt-4">
+              Tag us @loscarnales for a chance to be featured!
+            </p>
           </div>
         </div>
 
         <div className="mt-8 pt-8 border-t border-white/20 text-center text-white/70">
-          <p>&copy; 2024 Your Store. All rights reserved.</p>
+          <p>&copy; 2024 Los Carnales. All rights reserved. Made with 🔥 in Mexico.</p>
         </div>
       </div>
     </div>
